@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caio Farias — Desenvolvedor Web</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<section class="hero" id="hero">
+
+  <div class="shape" style="top:8%; left:10%; width:34px; animation-delay:0s;">
+    <svg viewBox="0 0 34 34" fill="none"><polygon points="17,2 32,30 2,30" stroke="var(--coral)" stroke-width="2"/></svg>
+  </div>
+  <div class="shape" style="top:16%; right:12%; width:26px; animation-delay:1.2s;">
+    <svg viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="10" stroke="var(--mint)" stroke-width="2"/></svg>
+  </div>
+  <div class="shape" style="bottom:22%; left:7%; width:22px; animation-delay:2s;">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M4 12h16M4 6h10M4 18h6" stroke="var(--purple)" stroke-width="2" stroke-linecap="round"/></svg>
+  </div>
+  <div class="shape" style="bottom:16%; right:9%; width:30px; animation-delay:0.6s;">
+    <svg viewBox="0 0 30 30" fill="none"><rect x="4" y="4" width="22" height="22" rx="6" stroke="var(--yellow)" stroke-width="2"/></svg>
+  </div>
+
+  <span class="eyebrow mono">// iniciar_apresentacao()</span>
+
+  <div class="avatar-wrap">
+    <div class="avatar-ring"></div>
+    <div class="avatar">
+      <img src="perfil.jpg" alt="Foto de perfil de Caio Farias" class="avatar-img">
+    </div>
+  </div>
+
+  <h1>Caio Farias</h1>
+  <div class="title-line mono">
+    <span>&gt; desenvolvedor_web.status = "Front-end &amp; Back-end"</span><span class="blink">_</span>
+  </div>
+
+  <div class="socials">
+    <a href="https://github.com/CaioFarias-jpg" target="_blank" rel="noopener" aria-label="GitHub">
+      <svg viewBox="0 0 24 24" fill="var(--text-light)"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.4 1.3-3.2-.1-.3-.6-1.6.1-3.3 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.3 3 .1 3.3.8.8 1.3 1.9 1.3 3.2 0 4.6-2.7 5.6-5.4 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3z"/></svg>
+    </a>
+    <a href="mailto:caiovv1@outlook.com" aria-label="Email">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--text-light)" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+    </a>
+  </div>
+
+  <div class="hero-ctas">
+    <a href="mailto:<?php echo $email; ?>" class="btn btn-solid">Contrate-me</a>
+    <a href="#sobre" class="btn btn-outline">Sobre mim</a>
+  </div>
+
+  <a href="#sobre" class="scroll-hint">
+    <span>Rolar para baixo</span>
+    <span class="scroll-dot"></span>
+  </a>
+</section>
+
+<section class="about" id="sobre">
+  <span class="section-tag">01 / sobre-mim.md</span>
+  <h2>Sobre Mim</h2>
+
+  <div class="about-grid">
+    <div class="about-card">
+      <div class="mini-avatar">
+        <img src="badge.jpg" width="46" height="46" viewBox="0 0 24 24" fill="none">
+          <rect x="3" y="5" width="18" height="13" rx="2" stroke="#1a1530" stroke-width="1.8"/>
+          <path d="M8 10h8M8 13h5" stroke="#1a1530" stroke-width="1.8" stroke-linecap="round"/>
+        </img>
+      </div>
+      <span class="badge"><span class="badge-icon">🎮</span> respawn.lang — projeto autoral</span>
+      <p>Criador da <strong style="color:var(--text-light)">Respawn</strong>, uma linguagem de programação fictícia com vocabulário de videogame, feita para transpilar para JavaScript.</p>
+    </div>
+
+    <div class="about-text">
+      <p>"Olá! Sou o <strong>Caio Farias</strong>, estudante de desenvolvimento web em <strong>Campo Grande, MS</strong>. Estudo na <strong>Senac Hub Academy</strong> e participo de um projeto de fábrica de software, onde coloco em prática o que aprendo em código real."</p>
+
+      <p>"Gosto de misturar minha paixão por <strong>games</strong> com programação — foi assim que nasceu a <strong>Respawn</strong>. No dia a dia, também tenho me dedicado ao <strong>CiberReport</strong>, uma aplicação PHP/MySQL com arquitetura MVC, e a um sistema de gerenciamento de livraria em <strong>Python</strong>. Estou sempre \"de olho\" em aprender algo novo — atualmente evoluindo em Python e redes, com o curso da Cisco Networking Academy."</p>
+
+      <div class="skills">
+        <div class="skill-row">
+          <div class="skill-label"><span>PHP &amp; MySQL</span><span>em uso ativo</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="--pct:80%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label"><span>JavaScript</span><span>em uso ativo</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="--pct:72%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label"><span>Git &amp; GitHub</span><span>em uso ativo</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="--pct:85%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label"><span>Python</span><span>aprendendo</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="--pct:45%"></div></div>
+        </div>
+      </div>
+
+      <div class="tag-cloud">
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+        <span class="tag">PHP</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">SQL</span>
+        <span class="tag">Python</span>
+        <span class="tag">Git</span>
+        <span class="tag">VS Code</span>
+      </div>
+
+      <div class="about-ctas">
+        <a href="https://github.com/CaioFarias-jpg" target="_blank" rel="noopener" class="btn btn-solid">Ver GitHub</a>
+        <a href="mailto:caiovv1@outlook.com" class="btn btn-outline">Falar comigo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
