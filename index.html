@@ -6,6 +6,7 @@
 <title>Caio Farias — Desenvolvedor Web</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <link rel="stylesheet" href="index.css">
 </head>
 <body>
@@ -43,13 +44,17 @@
     <a href="https://github.com/CaioFarias-jpg" target="_blank" rel="noopener" aria-label="GitHub">
       <svg viewBox="0 0 24 24" fill="var(--text-light)"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.4 1.3-3.2-.1-.3-.6-1.6.1-3.3 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.3 3 .1 3.3.8.8 1.3 1.9 1.3 3.2 0 4.6-2.7 5.6-5.4 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3z"/></svg>
     </a>
+    <a <a href="https://www.linkedin.com/in/caio-farias-459695293/" target="_blank" rel="noopener" aria-label="LinkedIn">
+    <i class="fa-brands fa-linkedin"></i>
+    </a>
+    </a>
     <a href="mailto:caiovv1@outlook.com" aria-label="Email">
       <svg viewBox="0 0 24 24" fill="none" stroke="var(--text-light)" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
     </a>
   </div>
 
   <div class="hero-ctas">
-    <a href="mailto:<?php echo $email; ?>" class="btn btn-solid">Contrate-me</a>
+    <a href="mailto:caiovv1@outlook.com" class="btn btn-solid">Contrate-me</a>
     <a href="#sobre" class="btn btn-outline">Sobre mim</a>
   </div>
 
@@ -66,19 +71,16 @@
   <div class="about-grid">
     <div class="about-card">
       <div class="mini-avatar">
-        <img src="badge.jpg" width="46" height="46" viewBox="0 0 24 24" fill="none">
-          <rect x="3" y="5" width="18" height="13" rx="2" stroke="#1a1530" stroke-width="1.8"/>
-          <path d="M8 10h8M8 13h5" stroke="#1a1530" stroke-width="1.8" stroke-linecap="round"/>
-        </img>
+        <img src="perfil.jpg" alt="Caio Farias">
       </div>
-      <span class="badge"><span class="badge-icon">🎮</span> respawn.lang — projeto autoral</span>
-      <p>Criador da <strong style="color:var(--text-light)">Respawn</strong>, uma linguagem de programação fictícia com vocabulário de videogame, feita para transpilar para JavaScript.</p>
+      <p class="about-card-role">Estudante de Desenvolvimento Web</p>
+      <a href="https://github.com/CaioFarias-jpg" target="_blank" rel="noopener" class="btn btn-solid btn-small">Ver GitHub</a>
     </div>
 
     <div class="about-text">
-      <p>"Olá! Sou o <strong>Caio Farias</strong>, estudante de desenvolvimento web em <strong>Campo Grande, MS</strong>. Estudo na <strong>Senac Hub Academy</strong> e participo de um projeto de fábrica de software, onde coloco em prática o que aprendo em código real."</p>
+      <p>Olá! Sou o <strong>Caio Farias</strong>, estudante de desenvolvimento web em <strong>Campo Grande, MS</strong>. Estudo na <strong>Senac Hub Academy</strong> e participo de um projeto de fábrica de software, onde coloco em prática o que aprendo em código real.</p>
 
-      <p>"Gosto de misturar minha paixão por <strong>games</strong> com programação — foi assim que nasceu a <strong>Respawn</strong>. No dia a dia, também tenho me dedicado ao <strong>CiberReport</strong>, uma aplicação PHP/MySQL com arquitetura MVC, e a um sistema de gerenciamento de livraria em <strong>Python</strong>. Estou sempre \"de olho\" em aprender algo novo — atualmente evoluindo em Python e redes, com o curso da Cisco Networking Academy."</p>
+      <p>Meu stack principal envolve <strong>PHP, MySQL, JavaScript, HTML e CSS</strong>, e venho me aprofundando também em <strong>Python</strong> e em versionamento com <strong>Git &amp; GitHub</strong>. Um dos meus projetos em destaque é o <strong>CiberReport</strong>, uma aplicação PHP/MySQL com arquitetura MVC para relatórios de cibersegurança — sempre buscando unir organização de código com um resultado visual caprichado.</p>
 
       <div class="skills">
         <div class="skill-row">
@@ -109,14 +111,89 @@
         <span class="tag">Git</span>
         <span class="tag">VS Code</span>
       </div>
+    </div>
+  </div>
 
-      <div class="about-ctas">
-        <a href="https://github.com/CaioFarias-jpg" target="_blank" rel="noopener" class="btn btn-solid">Ver GitHub</a>
-        <a href="mailto:caiovv1@outlook.com" class="btn btn-outline">Falar comigo</a>
-      </div>
+  <div class="stats-row">
+    <div class="stat">
+      <span class="stat-icon">📦</span>
+      <span class="stat-number">6</span>
+      <span class="stat-label">Repositórios no GitHub</span>
+    </div>
+    <div class="stat">
+      <span class="stat-icon">📌</span>
+      <span class="stat-number">2</span>
+      <span class="stat-label">Projetos fixados</span>
+    </div>
+    <div class="stat">
+      <span class="stat-icon">🛠️</span>
+      <span class="stat-number">8+</span>
+      <span class="stat-label">Tecnologias estudadas</span>
+    </div>
+    <div class="stat">
+      <span class="stat-icon">☕</span>
+      <span class="stat-number">∞</span>
+      <span class="stat-label">Cafés durante os commits</span>
     </div>
   </div>
 </section>
+
+<section class="works" id="trabalhos">
+  <span class="section-tag">02 / trabalhos-recentes.md</span>
+  <h2>Trabalhos Recentes</h2>
+  <p class="works-sub">Projetos que deixei fixados no meu perfil do GitHub.</p>
+
+  <div class="filters" id="filters">
+    <button class="filter-btn active" data-filter="all">Todos</button>
+    <button class="filter-btn" data-filter="html">HTML/CSS</button>
+  </div>
+
+  <div class="works-grid" id="worksGrid">
+
+    <a class="work-card" data-cat="html" href="https://github.com/CaioFarias-jpg/Aula_JS" target="_blank" rel="noopener">
+      <div class="work-thumb work-thumb-1">
+        <svg viewBox="0 0 24 24" width="42" height="42" fill="none"><path d="M9 8l-4 4 4 4M15 8l4 4-4 4" stroke="#1a1530" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="work-info">
+        <h3>Aula_JS</h3>
+        <p>Exercícios e estudos práticos de JavaScript aplicados em HTML e CSS.</p>
+        <span class="work-tag">HTML</span>
+      </div>
+    </a>
+
+    <a class="work-card" data-cat="html" href="https://github.com/CaioFarias-jpg/Site_Restaurante" target="_blank" rel="noopener">
+      <div class="work-thumb work-thumb-2">
+        <svg viewBox="0 0 24 24" width="42" height="42" fill="none"><path d="M6 3v9M4 3v5a2 2 0 0 0 2 2 2 2 0 0 0 2-2V3M18 3c-2 0-3 2-3 5s1 5 3 5v8" stroke="#1a1530" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="work-info">
+        <h3>Site_Restaurante</h3>
+        <p>Landing page de um restaurante fictício, construída com HTML, CSS e JS.</p>
+        <span class="work-tag">HTML</span>
+      </div>
+    </a>
+
+  </div>
+
+  <a href="https://github.com/CaioFarias-jpg?tab=repositories" target="_blank" rel="noopener" class="btn btn-outline load-more">Ver todos os repositórios</a>
+</section>
+
+<script>
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.work-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+
+      cards.forEach(card => {
+        const show = filter === 'all' || card.dataset.cat === filter;
+        card.style.display = show ? 'flex' : 'none';
+      });
+    });
+  });
+</script>
 
 </body>
 </html>
