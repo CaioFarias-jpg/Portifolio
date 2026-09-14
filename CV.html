@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Currículo — Respawn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-page: #0d0a14;
+    --bg-window: #120e1c;
+    --bg-titlebar: #1a1428;
+    --purple: #a855f7;
+    --purple-dim: #7c3aed;
+    --text-main: #e4e0f0;
+    --text-dim: #8b8496;
+    --border: #2a2140;
+    --dot-red: #ff5f56;
+    --dot-yellow: #ffbd2e;
+    --dot-green: #27c93f;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg-page);
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(124,58,237,0.08), transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(168,85,247,0.06), transparent 40%);
+    font-family: 'JetBrains Mono', monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 16px;
+  }
+
+  /* Botão que abre o modal — parece um prompt de terminal */
+  .cv-trigger {
+    background: var(--bg-window);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: 15px;
+    padding: 14px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: border-color 0.2s ease, transform 0.15s ease;
+  }
+  .cv-trigger:hover {
+    border-color: var(--purple-dim);
+    transform: translateY(-1px);
+  }
+  .cv-trigger:focus-visible {
+    outline: 2px solid var(--purple);
+    outline-offset: 3px;
+  }
+  .cv-trigger .prompt-symbol { color: var(--purple); }
+  .cv-trigger .cmd-text { color: var(--text-main); }
+  .cv-trigger .blink-caret {
+    width: 8px; height: 16px;
+    background: var(--purple);
+    animation: blink 1.1s step-end infinite;
+  }
+
+  /* Overlay + modal */
+  .cv-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5,3,10,0.75);
+    backdrop-filter: blur(3px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+  }
+  .cv-overlay.open { display: flex; }
+
+  .cv-window {
+    width: 100%;
+    max-width: 640px;
+    max-height: 82vh;
+    background: var(--bg-window);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(168,85,247,0.06);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: pop-in 0.18s ease-out;
+  }
+
+  .cv-titlebar {
+    background: var(--bg-titlebar);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .cv-dots { display: flex; gap: 7px; }
+  .cv-dots span {
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    display: block;
+  }
+  .cv-dots .red { background: var(--dot-red); }
+  .cv-dots .yellow { background: var(--dot-yellow); }
+  .cv-dots .green { background: var(--dot-green); }
+  .cv-dots button {
+    all: unset;
+    cursor: pointer;
+  }
+  .cv-titlebar-label {
+    flex: 1;
+    text-align: center;
+    font-size: 12.5px;
+    color: var(--text-dim);
+    letter-spacing: 0.2px;
+    margin-right: 34px; /* compensa os dots pra centralizar de verdade */
+  }
+
+  .cv-body {
+    padding: 22px 24px 26px;
+    overflow-y: auto;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-main);
+  }
+  .cv-body::-webkit-scrollbar { width: 8px; }
+  .cv-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  .line { margin-bottom: 2px; }
+  .line .p { color: var(--purple); }
+  .line .path { color: #6ee7b7; }
+  .out {
+    margin: 4px 0 18px 0;
+    padding-left: 4px;
+    color: var(--text-dim);
+  }
+  .out strong { color: var(--text-main); font-weight: 500; }
+  .out ul { margin: 6px 0 0; padding-left: 18px; }
+  .out li { margin-bottom: 3px; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .tag {
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 3px 10px;
+    border-radius: 5px;
+    font-size: 12.5px;
+  }
+
+  .cv-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+    background: var(--purple-dim);
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 13.5px;
+    border: 1px solid transparent;
+    transition: background 0.15s ease;
+  }
+  .cv-download:hover { background: var(--purple); }
+
+  .cursor-final {
+    display: inline-block;
+    width: 8px; height: 15px;
+    background: var(--purple);
+    vertical-align: -2px;
+    animation: blink 1.1s step-end infinite;
+  }
+
+  @keyframes blink { 50% { opacity: 0; } }
+  @keyframes pop-in {
+    from { opacity: 0; transform: scale(0.97) translateY(6px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .blink-caret, .cursor-final { animation: none; }
+    .cv-window { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+  <button class="cv-trigger" id="openCvBtn" aria-haspopup="dialog" aria-controls="cvModal">
+    <span class="prompt-symbol">&gt;</span>
+    <span class="cmd-text">ver currículo</span>
+    <span class="blink-caret" aria-hidden="true"></span>
+  </button>
+
+  <div class="cv-overlay" id="cvOverlay">
+    <div class="cv-window" role="dialog" aria-modal="true" aria-label="Currículo de Caio" id="cvModal">
+
+      <div class="cv-titlebar">
+        <div class="cv-dots">
+          <button aria-label="Fechar" id="closeCvBtn"><span class="red"></span></button>
+          <span class="yellow"></span>
+          <span class="green"></span>
+        </div>
+        <span class="cv-titlebar-label">caio@respawn: ~</span>
+      </div>
+
+      <div class="cv-body">
+
+        <div class="line"><span class="p">$</span> whoami</div>
+        <div class="out"><strong>Caio Farias</strong> — Desenvolvedor Web</div>
+
+        <div class="line"><span class="p">$</span> cat <span class="path">sobre.txt</span></div>
+        <div class="out">
+          Estudante de Desenvolvimento Web no Senac Hub Academy (Campo Grande/MS).
+          Construo aplicações full-stack em PHP com arquitetura MVC, e assino meus
+          projetos sob a marca <strong>Respawn</strong>.
+        </div>
+
+        <div class="line"><span class="p">$</span> ls <span class="path">habilidades/</span></div>
+        <div class="out">
+          <div class="tag-row">
+            <span class="tag">PHP</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">HTML/CSS</span>
+            <span class="tag">Git &amp; GitHub</span>
+            <span class="tag">Python (em estudo)</span>
+          </div>
+        </div>
+
+        <div class="line"><span class="p">$</span> ls <span class="path">projetos/</span></div>
+        <div class="out">
+          <ul>
+            <li><strong>CiberReport</strong> — plataforma de relatórios de cibersegurança (PHP MVC)</li>
+            <li><strong>InfoTech</strong> — sistema de gestão para loja de hardware (PHP MVC)</li>
+            <li><strong>Habit Tracker</strong> — app full-stack de tarefas e hábitos (PHP MVC)</li>
+          </ul>
+        </div>
+
+        <div class="line"><span class="p">$</span> cat <span class="path">formacao.txt</span></div>
+        <div class="out">Desenvolvimento Web — Senac Hub Academy, Campo Grande/MS</div>
+
+        <div class="line"><span class="p">$</span> ./baixar-curriculo<span class="cursor-final"></span></div>
+        <div class="out">
+          <a class="cv-download" href="curriculo-caio.pdf" download>
+            ⭳ baixar curriculo-caio.pdf
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<script>
+  const openBtn = document.getElementById('openCvBtn');
+  const closeBtn = document.getElementById('closeCvBtn');
+  const overlay = document.getElementById('cvOverlay');
+
+  function openModal() {
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    openBtn.focus();
+  }
+
+  openBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+  });
+</script>
+
+</body>
+</html>
