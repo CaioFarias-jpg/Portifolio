@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Currículo — Respawn</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- ===================================================================
+     MODAL DO CURRÍCULO — cole este bloco (CSS + HTML + JS) no seu portfólio.
+     Para ligar ao SEU botão que já existe, veja as instruções no final.
+=================================================================== -->
+
 <style>
   :root {
-    --bg-page: #0d0a14;
     --bg-window: #120e1c;
     --bg-titlebar: #1a1428;
     --purple: #a855f7;
@@ -21,54 +17,6 @@
     --dot-green: #27c93f;
   }
 
-  * { box-sizing: border-box; }
-
-  body {
-    margin: 0;
-    min-height: 100vh;
-    background: var(--bg-page);
-    background-image:
-      radial-gradient(circle at 20% 20%, rgba(124,58,237,0.08), transparent 40%),
-      radial-gradient(circle at 80% 70%, rgba(168,85,247,0.06), transparent 40%);
-    font-family: 'JetBrains Mono', monospace;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 16px;
-  }
-
-  /* Botão que abre o modal — parece um prompt de terminal */
-  .cv-trigger {
-    background: var(--bg-window);
-    border: 1px solid var(--border);
-    color: var(--text-main);
-    font-family: inherit;
-    font-size: 15px;
-    padding: 14px 22px;
-    border-radius: 8px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    transition: border-color 0.2s ease, transform 0.15s ease;
-  }
-  .cv-trigger:hover {
-    border-color: var(--purple-dim);
-    transform: translateY(-1px);
-  }
-  .cv-trigger:focus-visible {
-    outline: 2px solid var(--purple);
-    outline-offset: 3px;
-  }
-  .cv-trigger .prompt-symbol { color: var(--purple); }
-  .cv-trigger .cmd-text { color: var(--text-main); }
-  .cv-trigger .blink-caret {
-    width: 8px; height: 16px;
-    background: var(--purple);
-    animation: blink 1.1s step-end infinite;
-  }
-
-  /* Overlay + modal */
   .cv-overlay {
     position: fixed;
     inset: 0;
@@ -79,6 +27,7 @@
     justify-content: center;
     padding: 20px;
     z-index: 1000;
+    font-family: 'JetBrains Mono', monospace;
   }
   .cv-overlay.open { display: flex; }
 
@@ -93,7 +42,7 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    animation: pop-in 0.18s ease-out;
+    animation: cv-pop-in 0.18s ease-out;
   }
 
   .cv-titlebar {
@@ -106,25 +55,19 @@
     flex-shrink: 0;
   }
   .cv-dots { display: flex; gap: 7px; }
-  .cv-dots span {
-    width: 11px; height: 11px;
-    border-radius: 50%;
-    display: block;
-  }
+  .cv-dots span { width: 11px; height: 11px; border-radius: 50%; display: block; }
   .cv-dots .red { background: var(--dot-red); }
   .cv-dots .yellow { background: var(--dot-yellow); }
   .cv-dots .green { background: var(--dot-green); }
-  .cv-dots button {
-    all: unset;
-    cursor: pointer;
-  }
+  .cv-dots button { all: unset; cursor: pointer; }
+
   .cv-titlebar-label {
     flex: 1;
     text-align: center;
     font-size: 12.5px;
     color: var(--text-dim);
     letter-spacing: 0.2px;
-    margin-right: 34px; /* compensa os dots pra centralizar de verdade */
+    margin-right: 34px;
   }
 
   .cv-body {
@@ -140,22 +83,12 @@
   .line { margin-bottom: 2px; }
   .line .p { color: var(--purple); }
   .line .path { color: #6ee7b7; }
-  .out {
-    margin: 4px 0 18px 0;
-    padding-left: 4px;
-    color: var(--text-dim);
-  }
+  .out { margin: 4px 0 18px 0; padding-left: 4px; color: var(--text-dim); }
   .out strong { color: var(--text-main); font-weight: 500; }
   .out ul { margin: 6px 0 0; padding-left: 18px; }
   .out li { margin-bottom: 3px; }
   .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-  .tag {
-    border: 1px solid var(--border);
-    color: var(--text-main);
-    padding: 3px 10px;
-    border-radius: 5px;
-    font-size: 12.5px;
-  }
+  .tag { border: 1px solid var(--border); color: var(--text-main); padding: 3px 10px; border-radius: 5px; font-size: 12.5px; }
 
   .cv-download {
     display: inline-flex;
@@ -168,7 +101,6 @@
     padding: 10px 16px;
     border-radius: 6px;
     font-size: 13.5px;
-    border: 1px solid transparent;
     transition: background 0.15s ease;
   }
   .cv-download:hover { background: var(--purple); }
@@ -178,115 +110,122 @@
     width: 8px; height: 15px;
     background: var(--purple);
     vertical-align: -2px;
-    animation: blink 1.1s step-end infinite;
+    animation: cv-blink 1.1s step-end infinite;
   }
 
-  @keyframes blink { 50% { opacity: 0; } }
-  @keyframes pop-in {
+  @keyframes cv-blink { 50% { opacity: 0; } }
+  @keyframes cv-pop-in {
     from { opacity: 0; transform: scale(0.97) translateY(6px); }
     to { opacity: 1; transform: scale(1) translateY(0); }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .blink-caret, .cursor-final { animation: none; }
+    .cursor-final { animation: none; }
     .cv-window { animation: none; }
   }
 </style>
-</head>
-<body>
 
-  <button class="cv-trigger" id="openCvBtn" aria-haspopup="dialog" aria-controls="cvModal">
-    <span class="prompt-symbol">&gt;</span>
-    <span class="cmd-text">ver currículo</span>
-    <span class="blink-caret" aria-hidden="true"></span>
-  </button>
+<div class="cv-overlay" id="cvOverlay">
+  <div class="cv-window" role="dialog" aria-modal="true" aria-label="Currículo de Caio" id="cvModal">
 
-  <div class="cv-overlay" id="cvOverlay">
-    <div class="cv-window" role="dialog" aria-modal="true" aria-label="Currículo de Caio" id="cvModal">
+    <div class="cv-titlebar">
+      <div class="cv-dots">
+        <button aria-label="Fechar" id="closeCvBtn"><span class="red"></span></button>
+        <span class="yellow"></span>
+        <span class="green"></span>
+      </div>
+      <span class="cv-titlebar-label">caio@respawn: ~</span>
+    </div>
 
-      <div class="cv-titlebar">
-        <div class="cv-dots">
-          <button aria-label="Fechar" id="closeCvBtn"><span class="red"></span></button>
-          <span class="yellow"></span>
-          <span class="green"></span>
-        </div>
-        <span class="cv-titlebar-label">caio@respawn: ~</span>
+    <div class="cv-body">
+
+      <div class="line"><span class="p">$</span> whoami</div>
+      <div class="out"><strong>Caio Farias</strong> — Desenvolvedor Web</div>
+
+      <div class="line"><span class="p">$</span> cat <span class="path">sobre.txt</span></div>
+      <div class="out">
+        Estudante de Desenvolvimento Web no Senac Hub Academy (Campo Grande/MS).
+        Construo aplicações full-stack em PHP com arquitetura MVC, e assino meus
+        projetos sob a marca <strong>Respawn</strong>.
       </div>
 
-      <div class="cv-body">
-
-        <div class="line"><span class="p">$</span> whoami</div>
-        <div class="out"><strong>Caio Farias</strong> — Desenvolvedor Web</div>
-
-        <div class="line"><span class="p">$</span> cat <span class="path">sobre.txt</span></div>
-        <div class="out">
-          Estudante de Desenvolvimento Web no Senac Hub Academy (Campo Grande/MS).
-          Construo aplicações full-stack em PHP com arquitetura MVC, e assino meus
-          projetos sob a marca <strong>Respawn</strong>.
+      <div class="line"><span class="p">$</span> ls <span class="path">habilidades/</span></div>
+      <div class="out">
+        <div class="tag-row">
+          <span class="tag">PHP</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">HTML/CSS</span>
+          <span class="tag">Git &amp; GitHub</span>
+          <span class="tag">Python (em estudo)</span>
         </div>
-
-        <div class="line"><span class="p">$</span> ls <span class="path">habilidades/</span></div>
-        <div class="out">
-          <div class="tag-row">
-            <span class="tag">PHP</span>
-            <span class="tag">MySQL</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">HTML/CSS</span>
-            <span class="tag">Git &amp; GitHub</span>
-            <span class="tag">Python (em estudo)</span>
-          </div>
-        </div>
-
-        <div class="line"><span class="p">$</span> ls <span class="path">projetos/</span></div>
-        <div class="out">
-          <ul>
-            <li><strong>CiberReport</strong> — plataforma de relatórios de cibersegurança (PHP MVC)</li>
-            <li><strong>InfoTech</strong> — sistema de gestão para loja de hardware (PHP MVC)</li>
-            <li><strong>Habit Tracker</strong> — app full-stack de tarefas e hábitos (PHP MVC)</li>
-          </ul>
-        </div>
-
-        <div class="line"><span class="p">$</span> cat <span class="path">formacao.txt</span></div>
-        <div class="out">Desenvolvimento Web — Senac Hub Academy, Campo Grande/MS</div>
-
-        <div class="line"><span class="p">$</span> ./baixar-curriculo<span class="cursor-final"></span></div>
-        <div class="out">
-          <a class="cv-download" href="curriculo-caio.pdf" download>
-            ⭳ baixar curriculo-caio.pdf
-          </a>
-        </div>
-
       </div>
+
+      <div class="line"><span class="p">$</span> ls <span class="path">projetos/</span></div>
+      <div class="out">
+        <ul>
+          <li><strong>CiberReport</strong> — plataforma de relatórios de cibersegurança (PHP MVC)</li>
+          <li><strong>InfoTech</strong> — sistema de gestão para loja de hardware (PHP MVC)</li>
+          <li><strong>Habit Tracker</strong> — app full-stack de tarefas e hábitos (PHP MVC)</li>
+        </ul>
+      </div>
+
+      <div class="line"><span class="p">$</span> cat <span class="path">formacao.txt</span></div>
+      <div class="out">Desenvolvimento Web — Senac Hub Academy, Campo Grande/MS</div>
+
+      <div class="line"><span class="p">$</span> ./baixar-curriculo<span class="cursor-final"></span></div>
+      <div class="out">
+        <a class="cv-download" href="curriculo-caio.pdf" download>
+          ⭳ baixar curriculo-caio.pdf
+        </a>
+      </div>
+
     </div>
   </div>
+</div>
 
 <script>
-  const openBtn = document.getElementById('openCvBtn');
-  const closeBtn = document.getElementById('closeCvBtn');
-  const overlay = document.getElementById('cvOverlay');
+  (function () {
+    const overlay = document.getElementById('cvOverlay');
+    const closeBtn = document.getElementById('closeCvBtn');
 
-  function openModal() {
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    closeBtn.focus();
-  }
-  function closeModal() {
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-    openBtn.focus();
-  }
+    function openCvModal() {
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus();
+    }
+    function closeCvModal() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
 
-  openBtn.addEventListener('click', openModal);
-  closeBtn.addEventListener('click', closeModal);
+    // Expõe as funções globalmente para você chamar no seu próprio botão
+    window.openCvModal = openCvModal;
+    window.closeCvModal = closeCvModal;
 
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) closeModal();
-  });
+    closeBtn.addEventListener('click', closeCvModal);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeCvModal(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('open')) closeCvModal();
+    });
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
-  });
+    // OPÇÃO AUTOMÁTICA: qualquer elemento com data-open-curriculo="true"
+    // já abre o modal sem precisar escrever JS extra.
+    document.querySelectorAll('[data-open-curriculo]').forEach((el) => {
+      el.addEventListener('click', openCvModal);
+    });
+  })();
 </script>
 
-</body>
-</html>
+<!-- ===================================================================
+     COMO LIGAR AO SEU BOTÃO EXISTENTE (escolha uma das duas opções):
+
+     OPÇÃO 1 — sem escrever JS, só adicione o atributo no seu botão:
+       <button data-open-curriculo>Currículo</button>
+
+     OPÇÃO 2 — se preferir chamar via JS/onclick:
+       <button onclick="openCvModal()">Currículo</button>
+
+     Nos dois casos, o resto (fechar, Esc, clique fora) já funciona
+     porque está tudo no script acima.
+=================================================================== -->
